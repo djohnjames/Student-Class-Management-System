@@ -26,7 +26,7 @@ public class GUI extends JFrame{
 	/**
 	 * Buttons for GUI
 	 */
-	private JButton insert, find, browse, create, b1, b2;
+	private JButton insert, find, browse, create;
 	/**
 	 * Text area for GUI
 	 */
@@ -134,6 +134,12 @@ public class GUI extends JFrame{
 		}
 	}
 	
+	/**
+	 * Used to determine if file has been imported. Assigns the txtFile
+	 * scanner to the file with name file
+	 * @param file filename to open
+	 * @return True if file is opened sucessfully, false if could not open
+	 */
 	private boolean fileFound(String file) {
 		try {
 			txtFile = new Scanner(new FileInputStream(file));
@@ -146,7 +152,7 @@ public class GUI extends JFrame{
 	}
 
 	/**
-	 * method used to find a student record.
+	 * Searchs through BST to find student and displays result.
 	 */
 	public void findStudent() {
 		if (checkBST() == false)
@@ -166,11 +172,10 @@ public class GUI extends JFrame{
 			String student = record.toString();
 			JOptionPane.showMessageDialog(null, student);
 		}
-		
 	}
 	
 	/**
-	 * method used to insert a student record.
+	 * Uses JOptionPanes to insert a new student to the BST
 	 */
 	public void insertStudent() {
 		if (checkBST() == false)
@@ -190,9 +195,7 @@ public class GUI extends JFrame{
 			String ye = year.getText().toString();
 			bst.insert(id, fac, maj, ye);
 			displayStudents(); //display with updated records
-			
-		}
-		
+		}		
 	}
 	
 	/**
@@ -212,6 +215,10 @@ public class GUI extends JFrame{
 		myText.setText(out.toString());
 	}
 
+	/**
+	 * Used to check if the BST has been filled or exists.
+	 * @return true if BST has data and false if not initialized
+	 */
 	private boolean checkBST() {
 		if(bst == null || bst.getRoot() == null) {
 			JOptionPane.showMessageDialog(null, "Please import a file first.");
@@ -219,5 +226,4 @@ public class GUI extends JFrame{
 		}
 		return true;
 	}
-	
 }
