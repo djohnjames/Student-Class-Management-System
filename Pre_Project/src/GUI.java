@@ -77,7 +77,7 @@ public class GUI extends JFrame{
 		});
 		south.add(find);
 		
-		browse = new JButton("Broswe");
+		browse = new JButton("Browse");
 		browse.addActionListener((ActionEvent e) -> {
 			System.out.println("BROWSE");
 			displayStudents();
