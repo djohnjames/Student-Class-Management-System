@@ -1,6 +1,8 @@
-package Client;
 
+
+import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -12,20 +14,20 @@ public class MainView extends JFrame {
 	private JButton removeCourseButton = new JButton ("Remove Course from Student Course");
 	private JButton viewAllCoursesButton  = new JButton ("View all Courses");
 	private JButton viewAllStudentCoursesButton  = new JButton ("View all Courses Taken by a Student");
-	private JButton createCourseButton = new JButton("Create a New Course");
+//	private JButton createCourseButton = new JButton("Create a New Course");
 	private JButton quitButton = new JButton ("Quit");
 	
-	boolean userType;
+	//char userType;
 	
 	public MainView() {
 		
 		super("Main Menu");
-		setSize(500, 500);
+		setSize(500, 200);
 		setLayout(new BorderLayout());
 		
 		//North
 		JPanel north = new JPanel();
-		north.add(new JLabel("Welcome to the main menu. Please select from the options below."));
+		north.add(new JLabel("Welcome to the Main Menu. Please select from the options below."));
 		add("North", north);
 		
 		//Center
@@ -34,18 +36,44 @@ public class MainView extends JFrame {
 		center.add(addCourseButton);
 		center.add(removeCourseButton);
 		center.add(viewAllCoursesButton);
+		center.add(viewAllStudentCoursesButton);
 		center.add(quitButton);
-		if(userType == true)
-			center.add(createCourseButton);
+
 		add("Center", center);
 		
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 
-	public void setUserType(boolean b) {
-		this.userType = b;
+//	public void setUserType(char b) {
+//		System.out.println("User type is: "+ userType);
+//		this.userType = b;
+//		System.out.println("User type is: "+ userType);
+//	}
+	
+	
+	
+	public void addSearchButtonListener(ActionListener listenForStudentButton) {
+		searchButton.addActionListener(listenForStudentButton);
 	}
 	
+	public void addAddCourseButtonListener(ActionListener listenForStudentButton) {
+		addCourseButton.addActionListener(listenForStudentButton);
+	}
 	
+	public void addRemoveCourseButtonListener(ActionListener listenForStudentButton) {
+		removeCourseButton.addActionListener(listenForStudentButton);
+	}
+	
+	public void addViewAllCoursesButtonListener(ActionListener listenForStudentButton) {
+		viewAllCoursesButton.addActionListener(listenForStudentButton);
+	}
+	
+	public void addViewAllStudentCoursesButtonListener(ActionListener listenForStudentButton) {
+		viewAllStudentCoursesButton.addActionListener(listenForStudentButton);
+	}
+	
+	public void addQuitButtonListener(ActionListener listenForStudentButton) {
+		quitButton.addActionListener(listenForStudentButton);
+	}
 	
 }

@@ -1,16 +1,27 @@
-
+package Client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class GUIController {
-
-	EntryView entryView;
-	LogInView logInView;
-	MainView mainView;
+	
+	private EntryView entryView;
+	private LogInView logInView;
+	private MainView mainView;
+	
+	private ClientController client;
 
 	
-	public GUIController(EntryView entryView, LogInView logInView, MainView mainview)
+	public GUIController(EntryView entryView, LogInView logInView, MainView mainview, ClientController client)
 	{
 		setEntryView(entryView);
 		this.entryView.addStudentButtonListener(new addStudentButtonListener());
@@ -29,14 +40,28 @@ public class GUIController {
 		this.mainView.addViewAllStudentCoursesButtonListener(new addViewAllStudentCoursesButtonListener());
 		this.mainView.addQuitButtonListener(new addQuitButtonListener());
 		
+		entryView.setVisible(true);
+		this.client = client;
+		System.out.println(this.client.receiveCommand());
 	}
 
-
+//	private void sendString(String toSend) {
+//		socketOut.println(toSend);
+//		socketOut.flush();
+//	}
 	
 	public class addSearchButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Search!");
+			String out = mainView.searchInputDisplay();
+			
+			//If not null search for course and display result
+			if(!out.contentEquals("")) {
+				System.out.println("You have the string: "+ "1" + out + " ready to send");
+				client.sendCommand("1" + out);
+				mainView.searchOutputDisplay(client.receiveCommand());
+			}
 		}
 	}
 	
@@ -44,6 +69,19 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("add course!!");
+			String out = mainView.addCourseDisplay();
+			System.out.println(out);
+			if(!out.contentEquals("")) {
+				client.sendCommand("2" + out);
+				String in = client.receiveCommand();
+				mainView.addCourseSuccess(in);
+				
+//				//if the return from server is 1(success) display success message
+//				if(in.contentEquals("1"))
+//					mainView.addCourseSuccess();
+//				else
+//					mainView.addCourseFailure();
+			}
 		}
 	}
 	
@@ -51,13 +89,31 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("remove course!!");
+			String out = mainView.removeCourseDisplay();
+			if(!out.contentEquals("")) {
+				client.sendCommand("3" + out);
+				String in = client.receiveCommand();
+				mainView.removeCourseSuccess(in);
+				
+				//if the return from server is 1(success) display success message
+//				if(in.contentEquals("1"))
+//					mainView.removeCourseSuccess();
+//				else
+//					mainView.removeCourseFailure();
+			}
 		}
 	}
+	
 	
 	public class addViewAllCoursesButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("view all course!!");
+			String out = "4"; //ask for all courses
+			client.sendCommand(out);
+			//recieve courses and send to display
+			String in = client.receiveCommand();
+			mainView.displayAllCourses(in);
 		}
 	}
 	
@@ -65,6 +121,14 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("view all student course!!");
+			String out = mainView.viewStudentCoursesDisplay();
+			//recieve courses and send to option pane
+			if(!out.contentEquals("")) {
+				client.sendCommand("5" + out);
+				String in = client.receiveCommand();
+				//if the return from server is 1(success) display success message
+				mainView.viewStudentCoursesResult(in);
+			}
 		}
 	}
 	
