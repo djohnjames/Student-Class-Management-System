@@ -104,7 +104,7 @@ public class RegistrationApp implements Runnable{
 				break;
 				
 			case 9: //Check student login
-				String [] userPass = read.split("/0");
+				String [] userPass = read.substring(1).split("/0");
 				sendString(db.validateLogin(userPass[0], userPass[1]));
 				
 				

@@ -19,8 +19,6 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
-	
-	
 	public void close() {
 		try {
 			// rs.close();
