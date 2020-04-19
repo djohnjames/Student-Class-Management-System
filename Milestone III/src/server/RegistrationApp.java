@@ -13,9 +13,7 @@ public class RegistrationApp implements Runnable{
 	
 	
 	private PrintWriter socketOut;
-	
 	private Socket aSocket;
-	
 	private BufferedReader socketIn;
 	
 	private CourseCatalogue cat = new CourseCatalogue ();
@@ -71,7 +69,7 @@ public class RegistrationApp implements Runnable{
 				System.out.println(cat.searchCat(cName, Integer.parseInt(cNum)).toString());
 				sendString(cat.searchCat(cName, Integer.parseInt(cNum)).toString());
 				break;
-			case 2: 
+			case 2: //
 				id = read.substring(1,2);
 				cName = read.substring(2,6);
 				cNum = read.substring(6,9);

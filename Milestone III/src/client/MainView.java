@@ -45,6 +45,7 @@ public class MainView extends JFrame {
 		//South
 		//JPanel south = new JPanel();
 		myText = new JTextArea();
+		myText.setEditable(false);
 		add("Center", new JScrollPane(myText));
 		
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
