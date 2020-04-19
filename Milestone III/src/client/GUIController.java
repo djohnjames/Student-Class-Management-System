@@ -10,23 +10,18 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class GUIController {
 	
-	private EntryView entryView;
 	private LogInView logInView;
 	private MainView mainView;
 	
 	private ClientController client;
 
 	
-	public GUIController(EntryView entryView, LogInView logInView, MainView mainview, ClientController client)
-	{
-		setEntryView(entryView);
-		this.entryView.addStudentButtonListener(new addStudentButtonListener());
-		this.entryView.addAdminButtonListener(new addAdminButtonListener());
-		
+	public GUIController(LogInView logInView, MainView mainview, ClientController client) {
 		setLogInView(logInView);
 		this.logInView.addCancelButtonListener(new addCancelButtonListener());
 		this.logInView.addLogInButtonListener(new addLogInButtonListener());
@@ -40,15 +35,10 @@ public class GUIController {
 		this.mainView.addViewAllStudentCoursesButtonListener(new addViewAllStudentCoursesButtonListener());
 		this.mainView.addQuitButtonListener(new addQuitButtonListener());
 		
-		entryView.setVisible(true);
+		logInView.setVisible(true);
 		this.client = client;
 		System.out.println(this.client.receiveCommand());
 	}
-
-//	private void sendString(String toSend) {
-//		socketOut.println(toSend);
-//		socketOut.flush();
-//	}
 	
 	public class addSearchButtonListener implements ActionListener {
 		@Override
@@ -152,6 +142,12 @@ public class GUIController {
 				mainView.setVisible(true);
 				logInView.setVisible(false);
 			}
+			else if(logInView.getUsernameField().getText().toString().contentEquals("22")) {
+				logInView.displayLogInSuccess();
+				mainView.setAdmin(true);
+				mainView.setVisible(true);
+				logInView.setVisible(false);
+			}
 			else
 				logInView.displayLogInError();
 		}
@@ -160,48 +156,16 @@ public class GUIController {
 	public class addCancelButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			logInView.setVisible(false);
-			entryView.setVisible(true);
+			System.exit(1);
 			System.out.println("cancel");
 		}
 	}
-	
-	
-	public class addStudentButtonListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//mainView.setUserType('s');	
-			System.out.println("STUDENT");
-			entryView.setVisible(false);
-			logInView.setVisible(true);
-				
-				 //false means student mode turned on
-		}
-	}
-	
-	public class addAdminButtonListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//mainView.setUserType('a');
-			System.out.println("ADMIN");
-			entryView.setVisible(false);
-			logInView.setVisible(true);
-		}
-	}
-	
-	public void setEntryView(EntryView entryView) {
-		this.entryView = entryView;
-	}
-
 
 	public void setLogInView(LogInView logInView) {
 		this.logInView = logInView;
 	}
 
-
 	public void setMainView(MainView mainview) {
 		this.mainView = mainview;
 	}
-	
-	
 }

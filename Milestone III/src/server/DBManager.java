@@ -89,6 +89,7 @@ public class DBManager implements IDBCredentials {
 		return courseList;
 	}
 	
+	
 	public ArrayList readStFromDataBase() {
 		studentList.add(new Student("Sara", 1));
 		studentList.add(new Student("Sam", 2));

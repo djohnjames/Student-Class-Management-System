@@ -17,8 +17,6 @@ public class ClientController {
 	
 	private Socket aSocket;
 	
-	//private Socket GUISocket;
-	
 	private BufferedReader stdIn;
 	
 	private BufferedReader socketIn;
@@ -34,10 +32,9 @@ public class ClientController {
 			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 			
 			//set up GUI
-			EntryView view1 = new EntryView();
-			LogInView view2 = new LogInView();
-			MainView view3 = new MainView();
-			GUIController GUI = new GUIController(view1, view2, view3, this);
+			LogInView view1 = new LogInView();
+			MainView view2 = new MainView();
+			GUIController GUI = new GUIController(view1, view2, this);
 			
 			
 		} catch (IOException e) {
@@ -63,44 +60,6 @@ public class ClientController {
 		
 		return data;
 	}
-	
-	
-//	public void communicate () {
-//		//String toServer = "";
-//		//String fromServer = "";
-//		try {
-//			while (true) {
-//				String line = "";
-//				//while (true) {
-//				line = socketIn.readLine();
-//						//if (line.contains("\0")) {
-//						//	line = line.replace("\0",  "");
-//					//		System.out.println(line);
-//					//		break;
-//					//	}
-//				System.out.println(line);
-//			
-//				line = stdIn.readLine();
-//				socketOut.println(line);
-//				socketOut.flush();
-//			}
-//		} catch (IOException e) {
-//			System.out.println("Sending error: " + e.getMessage());
-//		}
-//		
-//		finally {
-//			try {
-//				stdIn.close();
-//				aSocket.close();
-//				socketOut.close();
-//			}
-//			catch( IOException e) {
-//				System.out.println("Closing error: " + e.getMessage());
-//			}
-//		}
-//	}
-	
-	
 	
 	public static void main(String[] args) {
 		ClientController client = new ClientController("localhost", 9090);
