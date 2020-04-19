@@ -137,17 +137,25 @@ public class GUIController {
 			//System.out.println(logInView.getUsernameField().getText().toString());
 			//get: logInView.getUsernameField().getText().toString()
 			//check to make sure it matches in database
-			if(logInView.getUsernameField().getText().toString().contentEquals("11")) {
+			String username = logInView.getUsernameField().getText().toString();
+			String password = logInView.getPasswordField().getText().toString();
+			String out = username + "\0" + password;
+			client.sendCommand("9" + out);
+			String in = client.receiveCommand();
+			
+			if(in.contentEquals("1")) {
 				logInView.displayLogInSuccess();
 				mainView.setVisible(true);
 				logInView.setVisible(false);
 			}
+			//this for admin mode testing
 			else if(logInView.getUsernameField().getText().toString().contentEquals("22")) {
 				logInView.displayLogInSuccess();
 				mainView.setAdmin(true);
 				mainView.setVisible(true);
 				logInView.setVisible(false);
 			}
+			//if we are at else means login was not succesful
 			else
 				logInView.displayLogInError();
 		}

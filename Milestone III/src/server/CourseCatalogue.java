@@ -10,7 +10,6 @@ public class CourseCatalogue {
 	}
 	
 	private void loadFromDataBase() {
-		// TODO Auto-generated method stub
 		DBManager db = new DBManager();
 		setCourseList(db.readFromDataBase());
 		

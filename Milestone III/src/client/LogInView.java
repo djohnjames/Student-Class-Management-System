@@ -7,17 +7,19 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LogInView extends JFrame{
-
-	private String username, password;
 	
-	private JTextField usernameField;
-	private JTextField passwordField;
+	private JTextField usernameField = new JTextField(15);;
+	private JPasswordField passwordField = new JPasswordField(15);
 	
 	private JLabel usernameLabel = new JLabel("Username");
 	private JLabel passwordLabel = new JLabel("Password");
 	
 	private JButton logInButton = new JButton("Log In");
 	private JButton cancelButton = new JButton("Cancel");
+	
+	JPanel north = new JPanel();
+	JPanel center = new JPanel();
+	JPanel south = new JPanel();
 	
 	public LogInView() {
 		super("Student Log In");
@@ -26,14 +28,10 @@ public class LogInView extends JFrame{
 		setLayout(new BorderLayout());
 		
 		//North
-		JPanel north = new JPanel();
 		north.add(new JLabel("Please Enter Your Username and Password"));
 		add("North", north);
 		
 		//Center
-		JPanel center = new JPanel();
-		usernameField = new JTextField(15);
-		passwordField = new JTextField(15);
 		usernameLabel.setLabelFor(usernameField);
 		passwordLabel.setLabelFor(passwordField);
 		center.add(usernameLabel);
@@ -46,7 +44,6 @@ public class LogInView extends JFrame{
 		
 		
 		//South
-		JPanel south = new JPanel();
 		south.add(logInButton);
 		south.add(cancelButton);
 		add("South", south);
@@ -80,24 +77,6 @@ public class LogInView extends JFrame{
 
 	public JTextField getPasswordField() {
 		return passwordField;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-	
-	public String getUsername() {
-		return username;
 	}
 	
 }
