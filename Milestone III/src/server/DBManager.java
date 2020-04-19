@@ -25,6 +25,7 @@ public class DBManager implements IDBCredentials {
 			DriverManager.registerDriver(driver);
 			// Open a connection
 			conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+			System.out.println("Connected to Database");
 		} catch (SQLException e) {
 			System.out.println("Problem");
 			e.printStackTrace();
@@ -41,6 +42,7 @@ public class DBManager implements IDBCredentials {
 	}
 	
 	public String validateLogin(String id, String password) {
+		initializeConnection();
 		try {
 			String query = "SELECT * FROM STUDENTS WHERE id = ? and password = ?"; 
 			PreparedStatement pStat = conn.prepareStatement(query);
@@ -48,15 +50,18 @@ public class DBManager implements IDBCredentials {
 			pStat.setString(2, password);
 			rs = pStat.executeQuery();
 			if (rs.next()) {
+				close();
 				return "1";
 			}
 		} catch (SQLException e) {
 			System.out.println("Error validating login");
 		}
+		close();
 		return "nope";
 	}
 
 	public ArrayList <Course> readFromDataBase() {
+		initializeConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			String query = "SELECT * FROM COURSES";
@@ -71,6 +76,7 @@ public class DBManager implements IDBCredentials {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		close();
 //		courseList.add(new Course ("ENGG", 233));
 //		courseList.get(0).addOffering(new CourseOffering(1, 100));
 //		courseList.get(0).addOffering(new CourseOffering(2, 200));
@@ -80,7 +86,7 @@ public class DBManager implements IDBCredentials {
 	}
 	
 	public ArrayList <Student> readStFromDataBase() {
-		
+		initializeConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			String query = "SELECT * FROM STUDENTS";
@@ -91,6 +97,7 @@ public class DBManager implements IDBCredentials {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		close();
 //		studentList.add(new Student("Sara", 1));
 //		studentList.add(new Student("Sam", 2));
 //		studentList.add(new Student("Sad", 3));

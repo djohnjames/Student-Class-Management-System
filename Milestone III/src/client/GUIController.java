@@ -180,7 +180,7 @@ public class GUIController {
 			//check to make sure it matches in database
 			String username = logInView.getUsernameField().getText().toString();
 			String password = logInView.getPasswordField().getText().toString();
-			String out = username + "\0" + password;
+			String out = username + ";" + password;
 			client.sendCommand("9" + out);
 			String in = client.receiveCommand();
 			
