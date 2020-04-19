@@ -5,7 +5,6 @@ import java.sql.*;
 public class DatabasePopulator implements IDBCredentials{
 
 	private Connection conn;
-	private ResultSet rs;
 
 	public void initializeConnection() {
 		try {
@@ -20,6 +19,8 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
+	
+	
 	public void close() {
 		try {
 			// rs.close();
@@ -31,7 +32,7 @@ public class DatabasePopulator implements IDBCredentials{
 	
 	public void insertUser(int id, String name, String password) {
 		try {
-			String query = "INSERT INTO STUDENT (ID, name, password) values(?,?,?)";
+			String query = "INSERT INTO STUDENTS (ID, name, password) values(?,?,?)";
 			PreparedStatement pStat = conn.prepareStatement(query);
 			pStat.setInt(1, id);
 			pStat.setString(2, name);
@@ -46,7 +47,7 @@ public class DatabasePopulator implements IDBCredentials{
 	}
 
 	public void createStudentTable() {
-		String sql = "CREATE TABLE STUDENT " + "(id INTEGER not NULL, " + " name VARCHAR(255), "
+		String sql = "CREATE TABLE STUDENTS " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
 				 + " password VARCHAR(255), "+ " PRIMARY KEY ( id ))";
 		try {
 			Statement stmt = conn.createStatement(); // construct a statement
@@ -60,6 +61,38 @@ public class DatabasePopulator implements IDBCredentials{
 		System.out.println("Created table in given database...");
 	}
 	
+	public void createCourseTable() {
+		String sql = "CREATE TABLE COURSES " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
+				 + "number INTEGER not NULL, " + "offerings INTEGER not NULL, " + " PRIMARY KEY ( id ))";
+		try {
+			Statement stmt = conn.createStatement(); // construct a statement
+			stmt.executeUpdate(sql); // execute my query (i.e. sql)
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Table can NOT be created!");
+		}
+		System.out.println("Created table in given database...");
+	}
+	
+	public void insertCourse(int id, String name, int number, int offerings) {
+		try {
+			String query = "INSERT INTO COURSES (ID, name, number, offerings) values(?,?,?,?)";
+			PreparedStatement pStat = conn.prepareStatement(query);
+			pStat.setInt(1, id);
+			pStat.setString(2, name);
+			pStat.setInt(3, number);
+			pStat.setInt(4, offerings);
+			int rowCount = pStat.executeUpdate();
+			System.out.println("row Count = " + rowCount);
+			pStat.close();
+		} catch (SQLException e) {
+			System.out.println("problem inserting course");
+			e.printStackTrace();
+		}
+	}
+	
 	public void addStudents() {
 		insertUser(1, "Tyler", "bubblegum2");
 		insertUser(2, "Dylan", "javamaster69");
@@ -69,6 +102,14 @@ public class DatabasePopulator implements IDBCredentials{
 		insertUser(6, "Luke", "TinWits23");
 		insertUser(7, "Guillaume", "Raymond-Fauteux");
 	}
+	
+	public void addCourses() {
+		insertCourse(1, "ENGG", 233, 3);
+		insertCourse(2, "ENSF", 409, 1);
+		insertCourse(3, "PHYS", 259, 2);
+		insertCourse(4, "ENCM", 339, 2);
+		insertCourse(5, "ENEL", 353, 3);
+	}
 
 	
 	public static void main(String[] args) {
@@ -76,6 +117,8 @@ public class DatabasePopulator implements IDBCredentials{
 		pop.initializeConnection();
 		pop.createStudentTable();
 		pop.addStudents();
+		pop.createCourseTable();
+		pop.addCourses();
 		pop.close();
 	}
 

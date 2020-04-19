@@ -39,30 +39,61 @@ public class DBManager implements IDBCredentials {
 			e.printStackTrace();
 		}
 	}
+	
+	public String validateLogin(String id, String password) {
+		try {
+			String query = "SELECT * FROM STUDENTS WHERE id = ? and password = ?"; 
+			PreparedStatement pStat = conn.prepareStatement(query);
+			pStat.setString(1, id);
+			pStat.setString(2, password);
+			rs = pStat.executeQuery();
+			if (rs.next()) {
+				return "1";
+			}
+		} catch (SQLException e) {
+			System.out.println("Error validating login");
+		}
+		return "nope";
+	}
 
-	public ArrayList readFromDataBase() {
-		courseList.add(new Course ("ENGG", 233));
-		courseList.get(0).addOffering(new CourseOffering(1, 100));
-		courseList.get(0).addOffering(new CourseOffering(2, 200));
-		courseList.get(0).addOffering(new CourseOffering(3, 300));
+	public ArrayList <Course> readFromDataBase() {
+		try {
+			Statement stmt = conn.createStatement();
+			String query = "SELECT * FROM COURSES";
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				Course c = new Course(rs.getString("name"), rs.getInt("number"));
+				for(int i = 1; i <= rs.getInt("offerings"); i++) {
+					c.addOffering(new CourseOffering(i, 150));
+				}
+				courseList.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		courseList.add(new Course ("ENGG", 233));
+//		courseList.get(0).addOffering(new CourseOffering(1, 100));
+//		courseList.get(0).addOffering(new CourseOffering(2, 200));
+//		courseList.get(0).addOffering(new CourseOffering(3, 300));
 		
-		courseList.add(new Course ("ENSF", 409));
-		courseList.get(1).addOffering(new CourseOffering(1, 100));
-		courseList.get(1).addOffering(new CourseOffering(2, 200));
-		courseList.get(1).addOffering(new CourseOffering(3, 300));
-		
-		courseList.add(new Course ("PHYS", 259));
-		courseList.get(2).addOffering(new CourseOffering(1, 100));
-		courseList.get(2).addOffering(new CourseOffering(2, 200));
-		courseList.get(2).addOffering(new CourseOffering(3, 300));
-
 		return courseList;
 	}
 	
-	public ArrayList readStFromDataBase() {
-		studentList.add(new Student("Sara", 1));
-		studentList.add(new Student("Sam", 2));
-		studentList.add(new Student("Sad", 3));
+	public ArrayList <Student> readStFromDataBase() {
+		
+		try {
+			Statement stmt = conn.createStatement();
+			String query = "SELECT * FROM STUDENTS";
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				studentList.add(new Student(rs.getString("name"), rs.getInt("id")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		studentList.add(new Student("Sara", 1));
+//		studentList.add(new Student("Sam", 2));
+//		studentList.add(new Student("Sad", 3));
 		
 		return studentList;
 	}
