@@ -9,42 +9,46 @@ import javax.swing.*;
 
 public class MainView extends JFrame {
 
+	private JPanel north = new JPanel();
+	private JPanel south = new JPanel();
+	private JTextArea myText = new JTextArea();
+	
 	private JButton searchButton = new JButton ("Search Catalogue Courses");
 	private JButton addCourseButton = new JButton ("Add Course to Student Courses");
 	private JButton removeCourseButton = new JButton ("Remove Course from Student Course");
 	private JButton viewAllCoursesButton  = new JButton ("View all Courses");
 	private JButton viewAllStudentCoursesButton  = new JButton ("View all Courses Taken by a Student");
-//	private JButton createCourseButton = new JButton("Create a New Course");
+	private JButton createCourseButton = new JButton("Create a New Course");
 	private JButton quitButton = new JButton ("Quit");
 	
-	private JTextArea myText;
+	
+	private boolean admin = false;
 	//char userType;
 	
 	public MainView() {
-		
 		super("Main Menu");
-		setSize(1250, 250);
+		setSize(1500, 250);
 		setLayout(new BorderLayout());
 		
 		//North
-		JPanel north = new JPanel();
 		north.add(new JLabel("Welcome to the Main Menu. Please select from the options below."));
 		add("North", north);
 		
-		//Center
-		JPanel south = new JPanel();
+		//South
 		south.add(searchButton);
 		south.add(addCourseButton);
 		south.add(removeCourseButton);
 		south.add(viewAllCoursesButton);
 		south.add(viewAllStudentCoursesButton);
+		if(admin == true) {
+			south.add(createCourseButton);
+			System.out.println("Adding create course button to frame");
+		}
 		south.add(quitButton);
 
 		add("South", south);
-		
-		//South
-		//JPanel south = new JPanel();
-		myText = new JTextArea();
+
+		//Center
 		myText.setEditable(false);
 		add("Center", new JScrollPane(myText));
 		
@@ -201,6 +205,19 @@ public class MainView extends JFrame {
 	
 	public void addQuitButtonListener(ActionListener listenForStudentButton) {
 		quitButton.addActionListener(listenForStudentButton);
+	}
+
+	public void setAdmin(boolean b) {
+		this.admin  = b;
+		System.out.println("Admin set to true");
+		addAdminFeatures();
+		
+	}
+	
+	private void addAdminFeatures() {
+		south.add(createCourseButton);
+		System.out.println("Adding create course button to frame");
+		north.add(new JLabel("Admin mode enabled!"));
 	}
 	
 //	public void setUserType(char b) {
