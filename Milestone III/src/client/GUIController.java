@@ -12,20 +12,41 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
+/**
+ * The GUIController for the clients Registration App.
+ * Dictates functionality of model and GUI depending on user inputs.
+ * @author Dylan Rae & Tyler Sawatzky
+ * @version 1.0
+ * @since April 19, 2020
+ */
 public class GUIController {
 	
+	/**
+	 * The logInView controlled by the GUIController
+	 */
 	private LogInView logInView;
+	
+	/**
+	 * The MainView controlled by the GUIController
+	 */
 	private MainView mainView;
 	
+	/**
+	 * The clientController used by the GUIController
+	 */
 	private ClientController client;
 
-	
+	/**
+	 * The constructor for the GUICOntroller. Adds listeners to buttons
+	 * and sets the logInView to visible.
+	 * @param logInView the logInView to be controlled
+	 * @param mainview the mainView to be controlled
+	 * @param client the client to be used
+	 */
 	public GUIController(LogInView logInView, MainView mainview, ClientController client) {
 		setLogInView(logInView);
 		this.logInView.addCancelButtonListener(new addCancelButtonListener());
 		this.logInView.addLogInButtonListener(new addLogInButtonListener());
-	
 		
 		setMainView(mainview);
 		this.mainView.addSearchButtonListener(new addSearchButtonListener());
@@ -40,7 +61,13 @@ public class GUIController {
 		System.out.println(this.client.receiveCommand());
 	}
 	
+	/**
+	 * Inner class for search button in main view.
+	 */
 	public class addSearchButtonListener implements ActionListener {
+		/**
+		 * If the search button fields are no null, sends a string to server.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Search!");
@@ -55,7 +82,14 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Inner class for add course button in main view.
+	 */
 	public class addAddCourseButtonListener implements ActionListener {
+		/**
+		 * When add course is clicked, sends string to server to add course.
+		 * Displays success message if successful.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("add course!!");
@@ -65,17 +99,18 @@ public class GUIController {
 				client.sendCommand("2" + out);
 				String in = client.receiveCommand();
 				mainView.addCourseSuccess(in);
-				
-//				//if the return from server is 1(success) display success message
-//				if(in.contentEquals("1"))
-//					mainView.addCourseSuccess();
-//				else
-//					mainView.addCourseFailure();
 			}
 		}
 	}
 	
+	/**
+	 * Inner class for remove button in main view
+	 */
 	public class addRemoveCourseButtonListener implements ActionListener {
+		/**
+		 * When remove course is clicked, sends string to server to remove course.
+		 * Displays success message if successful.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("remove course!!");
@@ -84,18 +119,18 @@ public class GUIController {
 				client.sendCommand("3" + out);
 				String in = client.receiveCommand();
 				mainView.removeCourseSuccess(in);
-				
-				//if the return from server is 1(success) display success message
-//				if(in.contentEquals("1"))
-//					mainView.removeCourseSuccess();
-//				else
-//					mainView.removeCourseFailure();
 			}
 		}
 	}
 	
-	
+	/**
+	 * Inner class for view all courses button in main view.
+	 */
 	public class addViewAllCoursesButtonListener implements ActionListener {
+		/**
+		 * When view all courses is selected, sends string to server asking
+		 * for all courses
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("view all course!!");
@@ -107,7 +142,13 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Inner class for view all student courses button in main view.
+	 */
 	public class addViewAllStudentCoursesButtonListener implements ActionListener {
+		/**
+		 * 
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("view all student course!!");

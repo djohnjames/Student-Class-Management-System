@@ -220,10 +220,4 @@ public class MainView extends JFrame {
 		north.add(new JLabel("Admin mode enabled!"));
 	}
 	
-//	public void setUserType(char b) {
-//	System.out.println("User type is: "+ userType);
-//	this.userType = b;
-//	System.out.println("User type is: "+ userType);
-//
-	
 }
