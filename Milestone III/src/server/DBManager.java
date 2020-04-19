@@ -40,36 +40,6 @@ public class DBManager implements IDBCredentials {
 		}
 	}
 
-	public void createStudentTable() {
-		String sql = "CREATE TABLE STUDENT " + "(id INTEGER not NULL, " + " name VARCHAR(255), "
-				+ " PRIMARY KEY ( id ))";
-		try {
-			Statement stmt = conn.createStatement(); // construct a statement
-			stmt.executeUpdate(sql); // execute my query (i.e. sql)
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Table can NOT be created!");
-		}
-		System.out.println("Created table in given database...");
-	}
-	
-	public void insertUser(int id, String name) {
-		try {
-			String query = "INSERT INTO STUDENT (ID, name) values(?,?)";
-			PreparedStatement pStat = conn.prepareStatement(query);
-			pStat.setInt(1, id);
-			pStat.setString(2, name);
-			int rowCount = pStat.executeUpdate();
-			System.out.println("row Count = " + rowCount);
-			pStat.close();
-		} catch (SQLException e) {
-			System.out.println("problem inserting user");
-			e.printStackTrace();
-		}
-	}
-
 	public ArrayList readFromDataBase() {
 		courseList.add(new Course ("ENGG", 233));
 		courseList.get(0).addOffering(new CourseOffering(1, 100));
