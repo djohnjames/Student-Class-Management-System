@@ -104,7 +104,7 @@ public class ClientController {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ClientController client = new ClientController("localhost", 9090);
+		ClientController client = new ClientController("127.0.0.1", 9090);
 	}
 	
 	
