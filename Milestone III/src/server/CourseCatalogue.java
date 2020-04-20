@@ -5,15 +5,16 @@ public class CourseCatalogue {
 	
 	private ArrayList <Course> courseList;
 	
-	public CourseCatalogue () {
-		loadFromDataBase();
+	public CourseCatalogue (ArrayList <Course> courseList) {
+		this.courseList = courseList;
+		//loadFromDataBase();
 	}
 	
-	private void loadFromDataBase() {
-		DBManager db = new DBManager();
-		setCourseList(db.readFromDataBase());
-		
-	}
+//	private void loadFromDataBase() {
+//		DBManager db = new DBManager();
+//		setCourseList(db.readFromDataBase());
+//		
+//	}
 	public void createCourseOffering (Course c, int secNum, int secCap) {
 		if (c!= null) {
 			CourseOffering theOffering = new CourseOffering (secNum, secCap);

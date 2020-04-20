@@ -16,14 +16,18 @@ public class RegistrationApp implements Runnable{
 	private Socket aSocket;
 	private BufferedReader socketIn;
 	
-	private CourseCatalogue cat = new CourseCatalogue ();
-	private ArrayList <Student> studentList = new ArrayList<Student>();
-	private DBManager db = new DBManager();
+	private CourseCatalogue cat;
+	private ArrayList <Student> studentList;
+	private DBManager db;
 	
 	
-	public RegistrationApp(Socket s) {
+	public RegistrationApp(Socket s, DBManager db) {
 		//studentList = db.readStFromDataBase();
 		aSocket = s;
+		this.db = db;
+		System.out.println(db.test());
+		cat = new CourseCatalogue(db.getCourseList());
+		studentList = db.getStudentList();
 		try {
 			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
 			socketOut = new PrintWriter(aSocket.getOutputStream());
@@ -39,7 +43,6 @@ public class RegistrationApp implements Runnable{
 	}
 	
 	public void menu() {
-		studentList = db.readStFromDataBase();
 		String read = "";
 		String cName = "";
 		String cNum = "";

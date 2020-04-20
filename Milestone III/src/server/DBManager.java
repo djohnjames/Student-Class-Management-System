@@ -7,8 +7,8 @@ import java.sql.*;
 //program
 public class DBManager implements IDBCredentials {
 	
-	ArrayList <Course> courseList;
-	ArrayList <Student> studentList;
+	volatile ArrayList <Course> courseList;
+	volatile ArrayList <Student> studentList;
 	
 	public DBManager () {
 		courseList = new ArrayList<Course>();
@@ -60,7 +60,7 @@ public class DBManager implements IDBCredentials {
 		return "nope";
 	}
 
-	public ArrayList <Course> readFromDataBase() {
+	public void readFromDataBase() {
 		initializeConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -82,10 +82,10 @@ public class DBManager implements IDBCredentials {
 //		courseList.get(0).addOffering(new CourseOffering(2, 200));
 //		courseList.get(0).addOffering(new CourseOffering(3, 300));
 		
-		return courseList;
+		//return courseList;
 	}
 	
-	public ArrayList <Student> readStFromDataBase() {
+	public void readStFromDataBase() {
 		initializeConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -102,16 +102,19 @@ public class DBManager implements IDBCredentials {
 //		studentList.add(new Student("Sam", 2));
 //		studentList.add(new Student("Sad", 3));
 		
-		return studentList;
+		//return studentList;
 	}
 	
+	public ArrayList <Course> getCourseList() {
+		return courseList;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+	public ArrayList <Student> getStudentList() {
+		return studentList;
+	}
+
+	public String test() {
+		return "hi";
+	}
 
 }

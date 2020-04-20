@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,6 +16,9 @@ public class ServerController {
 	 * Used for multi game support
 	 */
 	private ExecutorService pool;
+	
+	DBManager db;
+	
 
 	/**
 	 * Construct a Server with Port 9090
@@ -23,6 +27,11 @@ public class ServerController {
 		try {
 			serverSocket = new ServerSocket(port);
 			pool = Executors.newCachedThreadPool();
+			
+			db = new DBManager();
+			db.readFromDataBase();
+			db.readStFromDataBase();
+			
 			System.out.println("Student Record Application is now running.");
 			
 		} catch (IOException e) {
@@ -41,7 +50,7 @@ public class ServerController {
 			while(true) {
 				System.out.println("Waiting for a user to connect...");
 				
-				RegistrationApp aRegApp = new RegistrationApp(serverSocket.accept());
+				RegistrationApp aRegApp = new RegistrationApp(serverSocket.accept(), db);
 				System.out.println("User connected!");
 				pool.execute(aRegApp);
 				//aRegApp.menu();
