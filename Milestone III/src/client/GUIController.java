@@ -54,6 +54,8 @@ public class GUIController {
 		this.mainView.addRemoveCourseButtonListener(new addRemoveCourseButtonListener());
 		this.mainView.addViewAllCoursesButtonListener(new addViewAllCoursesButtonListener());
 		this.mainView.addViewAllStudentCoursesButtonListener(new addViewAllStudentCoursesButtonListener());
+		this.mainView.addCreateCourseButtonListener(new addCreateCourseButtonListener());
+		this.mainView.addLogOutButtonListener(new addLogOutButtonListener());
 		this.mainView.addQuitButtonListener(new addQuitButtonListener());
 		
 		logInView.setVisible(true);
@@ -199,6 +201,7 @@ public class GUIController {
 				logInView.displayLogInSuccess();
 				mainView.setVisible(true);
 				logInView.setVisible(false);
+				mainView.setAdmin(true);
 			}
 			//this for admin mode testing
 			else if(logInView.getUsernameField().getText().toString().contentEquals("22")) {
@@ -212,6 +215,41 @@ public class GUIController {
 				logInView.displayLogInError();
 		}
 	}
+	
+	/**
+	 * Inner class for create course button in main view
+	 */
+	public class addCreateCourseButtonListener implements ActionListener {
+		/**
+		 * Adds a course.
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Create Course Button");
+			String out = mainView.createCourseDisplay();
+			if(!out.contentEquals("")) {
+				client.sendCommand("6" + out);
+				String in = client.receiveCommand();
+				mainView.addCourseSuccess(in);
+			}
+		}
+	}
+	
+	/**
+	 * Inner class for log out button in main view
+	 */
+	public class addLogOutButtonListener implements ActionListener {
+		/**
+		 * Returns to log in screen.
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			logInView.displayLogOutSuccess();
+			mainView.setVisible(false);
+			logInView.setVisible(true); 
+		}
+	}
+	
 	
 	/**
 	 * Inner class for cancel button function in log in view

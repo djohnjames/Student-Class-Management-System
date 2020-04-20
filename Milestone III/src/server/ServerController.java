@@ -32,7 +32,7 @@ public class ServerController {
 			db.readFromDataBase();
 			db.readStFromDataBase();
 			
-			System.out.println("Student Record Application is now running.");
+			System.out.println("Student Record Application is now running.\n\n");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -53,9 +53,8 @@ public class ServerController {
 				RegistrationApp aRegApp = new RegistrationApp(serverSocket.accept(), db);
 				System.out.println("User connected!");
 				pool.execute(aRegApp);
-				//aRegApp.menu();
 				
-				System.out.println("Registration App opened and running for a user.");
+				System.out.println("Registration App opened and running for a user.\n\n");
 			}
 		}
 		catch (Exception e) {

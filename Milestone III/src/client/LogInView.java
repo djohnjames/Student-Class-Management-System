@@ -99,12 +99,18 @@ public class LogInView extends JFrame{
 	}
 	
 	/**
-	 * Displays a log in success jOptionPane.
+	 * Displays a log in success JOptionPane.
 	 */
 	public void displayLogInSuccess() {
 		JOptionPane.showMessageDialog(null, "Log In Successful!");
 	}
 	
+	/**
+	 * Displays a log out success panel.
+	 */
+	public void displayLogOutSuccess() {
+		JOptionPane.showMessageDialog(null, "Log Out Successful!");
+	}
 
 	/**
 	 * Adds a listener for the login button.
@@ -137,5 +143,7 @@ public class LogInView extends JFrame{
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
+
+	
 	
 }

@@ -24,8 +24,11 @@ public class RegistrationApp implements Runnable{
 	public RegistrationApp(Socket s, DBManager db) {
 		aSocket = s;
 		this.db = db;
-		cat = new CourseCatalogue(db.getCourseList());
 		studentList = db.getStudentList();
+		cat = db.getCourseCatalogue();
+		
+		//cat = new CourseCatalogue(db.getCourseList());
+		
 		try {
 			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
 			socketOut = new PrintWriter(aSocket.getOutputStream());
@@ -47,6 +50,7 @@ public class RegistrationApp implements Runnable{
 		String cSec = "";
 		String sName = "";
 		String id = "";
+		String cSecCap = "";
 		int selection = 0;
 		while(true) {
 			try {
@@ -106,6 +110,20 @@ public class RegistrationApp implements Runnable{
 				String out = studentSearch(studentList, Integer.parseInt(id)).printRegs();
 				sendString(out);
 				break;
+				
+			case 6: //Add a course to course catalogue
+				cName = read.substring(1,5); //Course name (ENGG)
+				cNum = read.substring(5,8); //Course num (233)
+				cSec = read.substring(8,9); //Number of sections/offerings
+				cSecCap = read.substring(9); //Section capacity (150)
+				Course c = new Course(cName, Integer.parseInt(cNum));
+				for(int i = 1; i<=Integer.parseInt(cSec); i++) {
+					c.addOffering(new CourseOffering(i, Integer.parseInt(cSecCap)));			
+				}
+				cat.addCourse(c);
+				sendString("The course: " + c + " has been successfully added to the catalogue!");
+				break;
+			
 				
 			case 9: //Check student login
 				String [] userPass = read.substring(1).split(";");

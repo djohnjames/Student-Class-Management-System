@@ -45,6 +45,7 @@ public class DatabasePopulator implements IDBCredentials{
 	}
 
 	public void createStudentTable() {
+		initializeConnection();
 		String sql = "CREATE TABLE STUDENTS " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
 				 + " password VARCHAR(255), "+ " PRIMARY KEY ( id ))";
 		try {

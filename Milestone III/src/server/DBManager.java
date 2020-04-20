@@ -13,8 +13,9 @@ import java.sql.*;
  */
 public class DBManager implements IDBCredentials {
 	
-	volatile ArrayList <Course> courseList;
-	volatile ArrayList <Student> studentList;
+	private volatile ArrayList <Course> courseList;
+	private volatile ArrayList <Student> studentList;
+	private volatile CourseCatalogue cat;
 	
 	public DBManager () {
 		courseList = new ArrayList<Course>();
@@ -98,6 +99,7 @@ public class DBManager implements IDBCredentials {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		cat = new CourseCatalogue(courseList);
 		close();
 	}
 	
@@ -123,8 +125,8 @@ public class DBManager implements IDBCredentials {
 	 * Gets the course list
 	 * @return the ArrayList of courses
 	 */
-	public ArrayList <Course> getCourseList() {
-		return courseList;
+	public CourseCatalogue getCourseCatalogue() {
+		return cat;
 	}
 	
 	/**
