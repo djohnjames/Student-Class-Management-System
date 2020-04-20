@@ -103,7 +103,7 @@ public class MainView extends JFrame {
 		myText.setEditable(false);
 		add("Center", new JScrollPane(myText));
 		
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	/**

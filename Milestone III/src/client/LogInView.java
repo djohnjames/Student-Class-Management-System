@@ -88,7 +88,7 @@ public class LogInView extends JFrame{
 		south.add(cancelButton);
 		add("South", south);
 		
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	/**
