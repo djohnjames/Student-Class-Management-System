@@ -64,7 +64,7 @@ public class DBManager implements IDBCredentials {
 	public String validateLogin(String id, String password) {
 		initializeConnection();
 		try {
-			String query = "SELECT * FROM STUDENTS WHERE id = ? and password = ?"; 
+			String query = "SELECT * FROM USERS WHERE id = ? and password = ?"; 
 			PreparedStatement pStat = conn.prepareStatement(query);
 			pStat.setString(1, id);
 			pStat.setString(2, password);
@@ -114,7 +114,7 @@ public class DBManager implements IDBCredentials {
 		initializeConnection();
 		try {
 			Statement stmt = conn.createStatement();
-			String query = "SELECT * FROM STUDENTS";
+			String query = "SELECT * FROM USERS";
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				studentList.add(new Student(rs.getString("name"), rs.getInt("id")));

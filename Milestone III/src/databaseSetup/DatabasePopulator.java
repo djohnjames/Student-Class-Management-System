@@ -6,6 +6,9 @@ public class DatabasePopulator implements IDBCredentials{
 
 	private Connection conn;
 
+	/**
+	 * Initializes Java connection with the MySQL database
+	 */
 	public void initializeConnection() {
 		try {
 			// Register JDBC driver
@@ -19,6 +22,9 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
+	/**
+	 * Closes connection with MySQL database
+	 */
 	public void close() {
 		try {
 			// rs.close();
@@ -28,9 +34,17 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
+	/**
+	 * Inserts a user with the given properties to the students table
+	 * 
+	 * @param id the unique id of the user
+	 * @param name the user's name
+	 * @param password the user password
+	 * @param access the level of access of the user: admin or student
+	 */
 	public void insertUser(int id, String name, String password, String access) {
 		try {
-			String query = "INSERT INTO STUDENTS (ID, name, password, access) values(?,?,?,?)";
+			String query = "INSERT INTO USERS (ID, name, password, access) values(?,?,?,?)";
 			PreparedStatement pStat = conn.prepareStatement(query);
 			pStat.setInt(1, id);
 			pStat.setString(2, name);
@@ -45,8 +59,11 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 
-	public void createStudentTable() {
-		String sql = "CREATE TABLE STUDENTS " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
+	/**
+	 * Creates a table for the users.
+	 */
+	public void createUserTable() {
+		String sql = "CREATE TABLE USERS " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
 				 + " password VARCHAR(255), " + " access VARCHAR(255), " + " PRIMARY KEY ( id ))";
 		try {
 			Statement stmt = conn.createStatement(); // construct a statement
@@ -60,9 +77,12 @@ public class DatabasePopulator implements IDBCredentials{
 		System.out.println("Created table in given database...");
 	}
 	
+	/**
+	 * Creates a table for the courses
+	 */
 	public void createCourseTable() {
 		String sql = "CREATE TABLE COURSES " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
-				 + "number INTEGER not NULL, " + "offerings INTEGER not NULL, " + " PRIMARY KEY ( id ))";
+				 + "number INTEGER not NULL, " + "offerings INTEGER not NULL, " + " PRIMARY KEY (id))";
 		try {
 			Statement stmt = conn.createStatement(); // construct a statement
 			stmt.executeUpdate(sql); // execute my query (i.e. sql)
@@ -75,6 +95,14 @@ public class DatabasePopulator implements IDBCredentials{
 		System.out.println("Created table in given database...");
 	}
 	
+	/**
+	 * Inserts a course into the course table
+	 * 
+	 * @param id the unique id of the course
+	 * @param name the course name
+	 * @param number the course number
+	 * @param offerings the number of course offerings
+	 */
 	public void insertCourse(int id, String name, int number, int offerings) {
 		try {
 			String query = "INSERT INTO COURSES (ID, name, number, offerings) values(?,?,?,?)";
@@ -92,7 +120,7 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
-	public void addStudents() {
+	public void addUsers() {
 		insertUser(1, "Tyler", "bubblegum2", "Admin");
 		insertUser(2, "Dylan", "javamaster69", "Admin");
 		insertUser(3, "Cam", "fbrmaster420", "Student");
@@ -110,12 +138,15 @@ public class DatabasePopulator implements IDBCredentials{
 		insertCourse(5, "ENEL", 353, 3);
 	}
 
-	
+	/**
+	 * Runs the database populator
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		DatabasePopulator pop = new DatabasePopulator();
 		pop.initializeConnection();
-		pop.createStudentTable();
-		pop.addStudents();
+		pop.createUserTable();
+		pop.addUsers();
 		pop.createCourseTable();
 		pop.addCourses();
 		pop.close();
