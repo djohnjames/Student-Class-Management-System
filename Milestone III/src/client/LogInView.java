@@ -95,6 +95,7 @@ public class LogInView extends JFrame{
 	 * Displays a log in error jOptionPane.
 	 */
 	public void displayLogInError() {
+		UIManager.put("OptionPane.okButtonText", "Ok"); //add ok button
 		JOptionPane.showMessageDialog(null, "Credentials Invalid. Please Try Again.");
 	}
 	
@@ -102,13 +103,16 @@ public class LogInView extends JFrame{
 	 * Displays a log in success JOptionPane.
 	 */
 	public void displayLogInSuccess() {
+		UIManager.put("OptionPane.okButtonText", "Ok"); //add ok button
 		JOptionPane.showMessageDialog(null, "Log In Successful!");
+		
 	}
 	
 	/**
 	 * Displays a log out success panel.
 	 */
 	public void displayLogOutSuccess() {
+		UIManager.put("OptionPane.okButtonText", "Ok"); //add ok button
 		JOptionPane.showMessageDialog(null, "Log Out Successful!");
 	}
 

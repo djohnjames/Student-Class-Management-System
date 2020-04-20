@@ -37,18 +37,34 @@ public class GUIController {
 	private ClientController client;
 
 	/**
-	 * The constructor for the GUICOntroller. Adds listeners to buttons
-	 * and sets the logInView to visible.
-	 * @param logInView the logInView to be controlled
-	 * @param mainview the mainView to be controlled
+	 * The constructor for the GUIController.
 	 * @param client the client to be used
 	 */
-	public GUIController(LogInView logInView, MainView mainview, ClientController client) {
-		setLogInView(logInView);
+	public GUIController(ClientController client) {
+		newLogInView();
+		this.client = client;
+		System.out.println(this.client.receiveCommand());
+	}
+	
+	/**
+	 * Creates a new log in view
+	 */
+	public void newLogInView() {
+		logInView = new LogInView();
+		
 		this.logInView.addCancelButtonListener(new addCancelButtonListener());
 		this.logInView.addLogInButtonListener(new addLogInButtonListener());
 		
-		setMainView(mainview);
+		logInView.setVisible(true);
+	}
+	
+	/**
+	 * Creates and assigns a new main view
+	 * @param b True for admin, false for student
+	 */
+	public void newMainView(Boolean b) {
+		mainView = new MainView(b);
+		
 		this.mainView.addSearchButtonListener(new addSearchButtonListener());
 		this.mainView.addAddCourseButtonListener(new addAddCourseButtonListener());
 		this.mainView.addRemoveCourseButtonListener(new addRemoveCourseButtonListener());
@@ -57,10 +73,6 @@ public class GUIController {
 		this.mainView.addCreateCourseButtonListener(new addCreateCourseButtonListener());
 		this.mainView.addLogOutButtonListener(new addLogOutButtonListener());
 		this.mainView.addQuitButtonListener(new addQuitButtonListener());
-		
-		logInView.setVisible(true);
-		this.client = client;
-		System.out.println(this.client.receiveCommand());
 	}
 	
 	/**
@@ -198,15 +210,16 @@ public class GUIController {
 			//System.out.println(in);
 			if(in.contentEquals("1")) {
 				logInView.displayLogInSuccess();
+				newMainView(false);
 				mainView.setVisible(true);
-				logInView.setVisible(false);
+				logInView.dispose();
 			}
 			//this for admin mode testing
 			else if(in.contentEquals("2")) {
 				logInView.displayLogInSuccess();
-				mainView.setAdmin(true);
+				newMainView(true);
 				mainView.setVisible(true);
-				logInView.setVisible(false);
+				logInView.dispose();
 			}
 			//if we are at else means login was not succesful
 			else
@@ -243,11 +256,10 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			logInView.displayLogOutSuccess();
-			mainView.setVisible(false);
-			logInView.setVisible(true); 
+			mainView.dispose();
+			newLogInView();
 		}
 	}
-	
 	
 	/**
 	 * Inner class for cancel button function in log in view

@@ -70,15 +70,12 @@ public class MainView extends JFrame {
 	 */
 	private JButton logOutButton = new JButton("Log Out");
 	
-	/**
-	 * A boolean used to determine if it is admin or student view.
-	 */
-	private boolean admin = false;
 
 	/**
-	 * The default constructor for the view.
+	 * The contructor for the main view
+	 * @param admin True if admin view, false if student view.
 	 */
-	public MainView() {
+	public MainView(Boolean admin) {
 		super("Main Menu");
 		setSize(600, 500);
 		setLayout(new BorderLayout());
@@ -94,6 +91,9 @@ public class MainView extends JFrame {
 		west.add(removeCourseButton);
 		west.add(viewAllCoursesButton);
 		west.add(viewAllStudentCoursesButton);
+		if(admin) {
+			west.add(createCourseButton);
+		}
 		west.add(logOutButton);
 		west.add(quitButton);
 
@@ -171,7 +171,7 @@ public class MainView extends JFrame {
 	}
 	
 	/**
-	 * Displays a ane to notify of course addition success.
+	 * Displays a pane to notify of course addition success.
 	 * @param in The string to be displayed in the pane.
 	 */
 	public void addCourseSuccess(String in) {
@@ -348,24 +348,5 @@ public class MainView extends JFrame {
 	 */
 	public void addQuitButtonListener(ActionListener listenForStudentButton) {
 		quitButton.addActionListener(listenForStudentButton);
-	}
-
-	/**
-	 * Used to se the admin boolean. Calls function to add admin features.
-	 * @param b true for adding an admin
-	 */
-	public void setAdmin(boolean b) {
-		this.admin  = b;
-		System.out.println("Admin user detected!");
-		addAdminFeatures();
-		
-	}
-	
-	/**
-	 * Adds admin button and label to mainview frame.
-	 */
-	private void addAdminFeatures() {
-		west.add(createCourseButton);
-		north.add(new JLabel("Admin mode enabled!"));
 	}
 }

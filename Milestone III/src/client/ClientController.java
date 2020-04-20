@@ -49,9 +49,7 @@ public class ClientController {
 			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 			
 			//set up GUI
-			LogInView view1 = new LogInView();
-			MainView view2 = new MainView();
-			GUIController GUI = new GUIController(view1, view2, this);
+			GUIController GUI = new GUIController(this);
 			
 			
 		} catch (IOException e) {
@@ -88,6 +86,9 @@ public class ClientController {
 		return data;
 	}
 	
+	/**
+	 * Closes the socket connections for the client.
+	 */
 	public void close() {
 		try {
 			aSocket.close();
@@ -104,7 +105,6 @@ public class ClientController {
 	 */
 	public static void main(String[] args) {
 		ClientController client = new ClientController("localhost", 9090);
-		//client.communicate();
 	}
 	
 	
