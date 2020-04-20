@@ -9,26 +9,54 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * A server-side application for a student registration app.
+ * Based on client request, sends back required info for GUI.
+ * @author Dylan Rae & Tyler Sawatzky
+ * @version 1.0
+ * @since April 20, 2020
+ */
 public class RegistrationApp implements Runnable{
-	
-	
+	/**
+	 * The printwriter to act as socket out
+	 */
 	private PrintWriter socketOut;
+	
+	/**
+	 * The server socket to connect to the client.
+	 */
 	private Socket aSocket;
+	
+	/**
+	 * The buffered reader to act as socket in
+	 */
 	private BufferedReader socketIn;
 	
+	/**
+	 * The course catalogue used by the app.
+	 */
 	private CourseCatalogue cat;
+	
+	/**
+	 * The student list used by the app.
+	 */
 	private ArrayList <Student> studentList;
+	
+	/**
+	 * The database manager for the app.
+	 */
 	private DBManager db;
 	
-	
+	/**
+	 * The constructor for the application. Sends to client a successmessage when complete.
+	 * @param s The socket to connect to.
+	 * @param db The database to use.
+	 */
 	public RegistrationApp(Socket s, DBManager db) {
 		aSocket = s;
 		this.db = db;
 		studentList = db.getStudentList();
 		cat = db.getCourseCatalogue();
-		
-		//cat = new CourseCatalogue(db.getCourseList());
-		
 		try {
 			socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
 			socketOut = new PrintWriter(aSocket.getOutputStream());
@@ -38,11 +66,18 @@ public class RegistrationApp implements Runnable{
 		sendString("Connected to a Student Record App!");
 	}
 	
+	/**
+	 * The run function for multi threading.
+	 */
 	public void run() {
 		this.menu();
 		System.out.println("User disconnected.");
 	}
 	
+	/**
+	 * The central function for the application. 
+	 * Reads client message and executes desired command.
+	 */
 	public void menu() {
 		String read = "";
 		String cName = "";
@@ -123,7 +158,6 @@ public class RegistrationApp implements Runnable{
 				cat.addCourse(c);
 				sendString("The course: " + c + " has been successfully added to the catalogue!");
 				break;
-			
 				
 			case 9: //Check student login
 				String [] userPass = read.substring(1).split(";");
@@ -136,12 +170,19 @@ public class RegistrationApp implements Runnable{
 		}
 	}
 	
+	/**
+	 * Used for sending a string through teh socketout.
+	 * @param toSend The string to send.
+	 */
 	private void sendString(String toSend) {
 		socketOut.println(toSend);
 		socketOut.flush();
 		//System.out.println("Sent: " + toSend + " to client");
 	}
 	
+	/**
+	 * Used to close socket connections.
+	 */
 	public void close() {
 		try {
 			aSocket.close();
@@ -152,6 +193,12 @@ public class RegistrationApp implements Runnable{
 		}
 	}
 	
+	/**
+	 * Used for searching for a student in the student list.
+	 * @param studentList The list to search through.
+	 * @param studentID The id to search for.
+	 * @return The student with matching credentials
+	 */
 	private Student studentSearch(ArrayList<Student> studentList, int studentID) {
 		for(Student student: studentList) {
 			if(studentID == student.getStudentId()) {
