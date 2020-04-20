@@ -196,15 +196,13 @@ public class GUIController {
 			client.sendCommand("9" + out);
 			String in = client.receiveCommand();
 			//System.out.println(in);
-			
 			if(in.contentEquals("1")) {
 				logInView.displayLogInSuccess();
 				mainView.setVisible(true);
 				logInView.setVisible(false);
-				mainView.setAdmin(true);
 			}
 			//this for admin mode testing
-			else if(logInView.getUsernameField().getText().toString().contentEquals("22")) {
+			else if(in.contentEquals("2")) {
 				logInView.displayLogInSuccess();
 				mainView.setAdmin(true);
 				mainView.setVisible(true);

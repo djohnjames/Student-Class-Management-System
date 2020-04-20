@@ -6,22 +6,32 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * A server-side controller for a student registration application.
+ * @author Dylan Rae & Tyler Sawatzky
+ * @version 1.0
+ * @since April 20th, 2020
+ */
 public class ServerController {
 	
 	/**
 	 * A serverSocket used for connecting
 	 */
 	private ServerSocket serverSocket;
+	
 	/**
 	 * Used for multi game support
 	 */
 	private ExecutorService pool;
 	
+	/**
+	 * The Database manager to be used by the server.
+	 */
 	DBManager db;
 	
-
 	/**
-	 * Construct a Server with Port 9090
+	 * The contructor for the server. 
+	 * @param port The port to connect to.
 	 */
 	public ServerController(int port) {
 		try {
@@ -61,12 +71,10 @@ public class ServerController {
 			e.printStackTrace();
 			pool.shutdown();
 		}
-
 	}
 	
 	/**
 	 * Runs the Server.
-	 * 
 	 * @param args
 	 */
 	public static void main(String [] args) {
