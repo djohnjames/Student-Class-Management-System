@@ -50,6 +50,7 @@ public class RegistrationApp implements Runnable{
 		while(true) {
 			try {
 				read = socketIn.readLine();
+				//System.out.println("Received: " + read + " from client");
 				try {
 				selection = Character.getNumericValue((read.charAt(0)));
 				} catch(StringIndexOutOfBoundsException e) {
@@ -107,8 +108,7 @@ public class RegistrationApp implements Runnable{
 				System.out.println(read);
 				String [] userPass = read.substring(1).split(";");
 				sendString(db.validateLogin(userPass[0], userPass[1]));
-				
-				
+				break;
 			default:
 				sendString("Invalid Entry!");
 			}	
@@ -118,6 +118,7 @@ public class RegistrationApp implements Runnable{
 	private void sendString(String toSend) {
 		socketOut.println(toSend);
 		socketOut.flush();
+		//System.out.println("Sent: " + toSend + " to client");
 	}
 	
 	private Student studentSearch(ArrayList<Student> studentList, int studentID) {

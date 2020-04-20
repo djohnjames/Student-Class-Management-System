@@ -66,6 +66,7 @@ public class ClientController {
 	public void sendCommand(String s) {
 		socketOut.println(s);
 		socketOut.flush();
+		//System.out.println("Sent: "+ s + " to server");
 	}
 	
 	/**
@@ -83,6 +84,7 @@ public class ClientController {
 		if(data.contains("\0")) {
 			data = data.replace("\0", "\n");
 		}
+		//System.out.println("Received : " + data + " from server");
 		return data;
 	}
 	

@@ -175,14 +175,12 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("login");
-			//System.out.println(logInView.getUsernameField().getText().toString());
-			//get: logInView.getUsernameField().getText().toString()
-			//check to make sure it matches in database
 			String username = logInView.getUsernameField().getText().toString();
 			String password = logInView.getPasswordField().getText().toString();
 			String out = username + ";" + password;
 			client.sendCommand("9" + out);
 			String in = client.receiveCommand();
+			//System.out.println(in);
 			
 			if(in.contentEquals("1")) {
 				logInView.displayLogInSuccess();
