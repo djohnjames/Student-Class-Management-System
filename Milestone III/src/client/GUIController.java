@@ -147,7 +147,7 @@ public class GUIController {
 	 */
 	public class addViewAllStudentCoursesButtonListener implements ActionListener {
 		/**
-		 * 
+		 * Sends and receives strings to view all courses
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -163,7 +163,13 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Inner class for quit button in main view
+	 */
 	public class addQuitButtonListener implements ActionListener {
+		/**
+		 * Quits the program.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Quit");
@@ -171,7 +177,14 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Inner class for log in button in in LogInView
+	 */
 	public class addLogInButtonListener implements ActionListener {
+		/**
+		 * Sends and recieves Strings for log in validation. Then
+		 * launches main view if ok.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("login");
@@ -200,7 +213,13 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Inner class for cancel button function in log in view
+	 */
 	public class addCancelButtonListener implements ActionListener {
+		/**
+		 * Quits the program.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.exit(1);
@@ -208,10 +227,18 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * A setter for the log in view
+	 * @param logInView The log in view to set
+	 */
 	public void setLogInView(LogInView logInView) {
 		this.logInView = logInView;
 	}
 
+	/**
+	 * A setter for the main view
+	 * @param mainview The main view to set
+	 */
 	public void setMainView(MainView mainview) {
 		this.mainView = mainview;
 	}
