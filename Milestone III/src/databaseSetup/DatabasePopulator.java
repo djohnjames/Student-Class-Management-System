@@ -28,13 +28,14 @@ public class DatabasePopulator implements IDBCredentials{
 		}
 	}
 	
-	public void insertUser(int id, String name, String password) {
+	public void insertUser(int id, String name, String password, String access) {
 		try {
-			String query = "INSERT INTO STUDENTS (ID, name, password) values(?,?,?)";
+			String query = "INSERT INTO STUDENTS (ID, name, password, access) values(?,?,?,?)";
 			PreparedStatement pStat = conn.prepareStatement(query);
 			pStat.setInt(1, id);
 			pStat.setString(2, name);
 			pStat.setString(3, password);
+			pStat.setString(4, access);
 			int rowCount = pStat.executeUpdate();
 			System.out.println("row Count = " + rowCount);
 			pStat.close();
@@ -45,9 +46,8 @@ public class DatabasePopulator implements IDBCredentials{
 	}
 
 	public void createStudentTable() {
-		initializeConnection();
 		String sql = "CREATE TABLE STUDENTS " + "(ID INTEGER not NULL, " + " name VARCHAR(255), "
-				 + " password VARCHAR(255), "+ " PRIMARY KEY ( id ))";
+				 + " password VARCHAR(255), " + " access VARCHAR(255), " + " PRIMARY KEY ( id ))";
 		try {
 			Statement stmt = conn.createStatement(); // construct a statement
 			stmt.executeUpdate(sql); // execute my query (i.e. sql)
@@ -93,13 +93,13 @@ public class DatabasePopulator implements IDBCredentials{
 	}
 	
 	public void addStudents() {
-		insertUser(1, "Tyler", "bubblegum2");
-		insertUser(2, "Dylan", "javamaster69");
-		insertUser(3, "Cam", "fbrmaster420");
-		insertUser(4, "Michele", "WingBats11");
-		insertUser(5, "Aidan", "TicTocs87");
-		insertUser(6, "Luke", "TinWits23");
-		insertUser(7, "Guillaume", "Raymond-Fauteux");
+		insertUser(1, "Tyler", "bubblegum2", "Admin");
+		insertUser(2, "Dylan", "javamaster69", "Admin");
+		insertUser(3, "Cam", "fbrmaster420", "Student");
+		insertUser(4, "Michele", "WingBats11", "Student");
+		insertUser(5, "Aidan", "TicTocs87", "Student");
+		insertUser(6, "Luke", "TinWits23", "Student");
+		insertUser(7, "Guillaume", "Raymond-Fauteux", "Student");
 	}
 	
 	public void addCourses() {

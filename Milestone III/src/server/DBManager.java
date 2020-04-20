@@ -70,6 +70,10 @@ public class DBManager implements IDBCredentials {
 			pStat.setString(2, password);
 			rs = pStat.executeQuery();
 			if (rs.next()) {
+				if(rs.getString("Access").equals("Admin")) {
+					close();
+					return "2";
+				}
 				close();
 				return "1";
 			}
