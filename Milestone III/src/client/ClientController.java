@@ -88,6 +88,16 @@ public class ClientController {
 		return data;
 	}
 	
+	public void close() {
+		try {
+			aSocket.close();
+			socketIn.close();
+			socketOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Main function for client.
 	 * @param args

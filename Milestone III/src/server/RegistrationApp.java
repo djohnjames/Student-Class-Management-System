@@ -25,7 +25,6 @@ public class RegistrationApp implements Runnable{
 		//studentList = db.readStFromDataBase();
 		aSocket = s;
 		this.db = db;
-		System.out.println(db.test());
 		cat = new CourseCatalogue(db.getCourseList());
 		studentList = db.getStudentList();
 		try {
@@ -40,6 +39,7 @@ public class RegistrationApp implements Runnable{
 	
 	public void run() {
 		this.menu();
+		System.out.println("User disconnected.");
 	}
 	
 	public void menu() {
@@ -59,13 +59,15 @@ public class RegistrationApp implements Runnable{
 				} catch(StringIndexOutOfBoundsException e) {
 					System.err.println("Input string to small");
 				}
-				
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
 			switch(selection) {
+			case 0:
+				close();
+				return;
+			
 			case 1: //Course catalogue search
 				cName = read.substring(1,5);
 				 cNum = read.substring(5,8);
@@ -107,11 +109,13 @@ public class RegistrationApp implements Runnable{
 				sendString(out);
 				break;
 				
+			
+				
 			case 9: //Check student login
-				System.out.println(read);
 				String [] userPass = read.substring(1).split(";");
 				sendString(db.validateLogin(userPass[0], userPass[1]));
 				break;
+				
 			default:
 				sendString("Invalid Entry!");
 			}	
@@ -122,6 +126,16 @@ public class RegistrationApp implements Runnable{
 		socketOut.println(toSend);
 		socketOut.flush();
 		//System.out.println("Sent: " + toSend + " to client");
+	}
+	
+	public void close() {
+		try {
+			aSocket.close();
+			socketIn.close();
+			socketOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private Student studentSearch(ArrayList<Student> studentList, int studentID) {

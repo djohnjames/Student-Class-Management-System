@@ -173,7 +173,7 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Quit");
-			System.exit(1);
+			quit();
 		}
 	}
 	
@@ -222,9 +222,15 @@ public class GUIController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.exit(1);
 			System.out.println("cancel");
+			quit();
 		}
+	}
+	
+	public void quit() {
+		client.sendCommand("0");
+		client.close();
+		System.exit(1);
 	}
 
 	/**

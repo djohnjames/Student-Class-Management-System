@@ -112,9 +112,4 @@ public class DBManager implements IDBCredentials {
 	public ArrayList <Student> getStudentList() {
 		return studentList;
 	}
-
-	public String test() {
-		return "hi";
-	}
-
 }
