@@ -28,5 +28,5 @@ public interface IDBCredentials {
    /**
     * The password to access the server.
     */
-   static final String PASSWORD = "NaLyDnAlYd1@";
+   static final String PASSWORD = "Moshirpour";
 }
