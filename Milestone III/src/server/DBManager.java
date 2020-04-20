@@ -3,8 +3,14 @@ import java.util.ArrayList;
 import java.sql.*;
 
 
-//This class is simulating a database for our
-//program
+/**
+ * Reads from the SQL database and maintains the lists of students and courses
+ * 
+ * @author Dylan Rae & Tyler Sawatzky
+ * @version 1.0
+ * @since April 19, 2020
+ *
+ */
 public class DBManager implements IDBCredentials {
 	
 	volatile ArrayList <Course> courseList;
@@ -18,6 +24,9 @@ public class DBManager implements IDBCredentials {
 	private Connection conn;
 	private ResultSet rs;
 	
+	/**
+	 * Initializes Java connection with the MySQL database
+	 */
 	public void initializeConnection() {
 		try {
 			// Register JDBC driver
@@ -32,6 +41,9 @@ public class DBManager implements IDBCredentials {
 		}
 	}
 	
+	/**
+	 * Closes connection with MySQL database
+	 */
 	public void close() {
 		try {
 			// rs.close();
@@ -41,6 +53,13 @@ public class DBManager implements IDBCredentials {
 		}
 	}
 	
+	/**
+	 * Validates a user ID and password
+	 * 
+	 * @param id user entered id
+	 * @param password user entered password
+	 * @return "1" if credentials valid, "0" otherwise
+	 */
 	public String validateLogin(String id, String password) {
 		initializeConnection();
 		try {
@@ -57,9 +76,12 @@ public class DBManager implements IDBCredentials {
 			System.out.println("Error validating login");
 		}
 		close();
-		return "nope";
+		return "0";
 	}
 
+	/**
+	 * Loads courses and course offerings from SQL database to member ArrayList <Course> courseList
+	 */
 	public void readFromDataBase() {
 		initializeConnection();
 		try {
@@ -77,14 +99,11 @@ public class DBManager implements IDBCredentials {
 			e.printStackTrace();
 		}
 		close();
-//		courseList.add(new Course ("ENGG", 233));
-//		courseList.get(0).addOffering(new CourseOffering(1, 100));
-//		courseList.get(0).addOffering(new CourseOffering(2, 200));
-//		courseList.get(0).addOffering(new CourseOffering(3, 300));
-		
-		//return courseList;
 	}
 	
+	/**
+	 * Loads students from SQL database to member ArrayList <Student> studentList
+	 */
 	public void readStFromDataBase() {
 		initializeConnection();
 		try {
@@ -98,17 +117,20 @@ public class DBManager implements IDBCredentials {
 			e.printStackTrace();
 		}
 		close();
-//		studentList.add(new Student("Sara", 1));
-//		studentList.add(new Student("Sam", 2));
-//		studentList.add(new Student("Sad", 3));
-		
-		//return studentList;
 	}
 	
+	/**
+	 * Gets the course list
+	 * @return the ArrayList of courses
+	 */
 	public ArrayList <Course> getCourseList() {
 		return courseList;
 	}
 	
+	/**
+	 * Gets the student list
+	 * @return the ArrayList of students
+	 */
 	public ArrayList <Student> getStudentList() {
 		return studentList;
 	}

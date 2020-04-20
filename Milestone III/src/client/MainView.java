@@ -2,6 +2,7 @@ package client;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import javax.swing.*;
 public class MainView extends JFrame {
 
 	private JPanel north = new JPanel();
-	private JPanel south = new JPanel();
+	private JPanel west = new JPanel();
 	private JTextArea myText = new JTextArea();
 	
 	private JButton searchButton = new JButton ("Search Catalogue Courses");
@@ -21,32 +22,32 @@ public class MainView extends JFrame {
 	private JButton createCourseButton = new JButton("Create a New Course");
 	private JButton quitButton = new JButton ("Quit");
 	
-	
 	private boolean admin = false;
 	//char userType;
 	
 	public MainView() {
 		super("Main Menu");
-		setSize(1500, 250);
+		setSize(600, 500);
 		setLayout(new BorderLayout());
 		
 		//North
-		north.add(new JLabel("Welcome to the Main Menu. Please select from the options below."));
+		north.add(new JLabel("Welcome to the Main Menu. Please select from the options on the left."));
 		add("North", north);
 		
 		//South
-		south.add(searchButton);
-		south.add(addCourseButton);
-		south.add(removeCourseButton);
-		south.add(viewAllCoursesButton);
-		south.add(viewAllStudentCoursesButton);
+		west.setLayout(new GridLayout(15,1));
+		west.add(searchButton);
+		west.add(addCourseButton);
+		west.add(removeCourseButton);
+		west.add(viewAllCoursesButton);
+		west.add(viewAllStudentCoursesButton);
 		if(admin == true) {
-			south.add(createCourseButton);
+			west.add(createCourseButton);
 			System.out.println("Adding create course button to frame");
 		}
-		south.add(quitButton);
+		west.add(quitButton);
 
-		add("South", south);
+		add("West", west);
 
 		//Center
 		myText.setEditable(false);
@@ -74,12 +75,12 @@ public class MainView extends JFrame {
 			return stringOut;
 		}
 		else if (option ==JOptionPane.CANCEL_OPTION) {
-			return null;
+			return "";
 		}
 		else {
 			UIManager.put("OptionPane.okButtonText", "Ok");
 			JOptionPane.showMessageDialog(null, "Search Invalid. Please Try Again.");
-			return null;
+			return "";
 		}
 	}
 	
@@ -112,7 +113,7 @@ public class MainView extends JFrame {
 			//System.out.println("You have the string: "+ stringOut + " ready to send");
 			return stringOut;
 		}
-		return null;
+		return "";
 	}
 	
 	public void addCourseSuccess(String in) {
@@ -144,7 +145,7 @@ public class MainView extends JFrame {
 			System.out.println("You have the string: "+ stringOut + " ready to send");
 			return stringOut;
 		}
-		return null;
+		return "";
 	}
 	
 	public void removeCourseSuccess(String in) {
@@ -175,7 +176,7 @@ public class MainView extends JFrame {
 			System.out.println("You have the string: "+ stringOut + " ready to send");
 			return stringOut;
 		}
-		return null;
+		return "";
 	}
 	
 	public void viewStudentCoursesResult(String s) {
@@ -215,7 +216,7 @@ public class MainView extends JFrame {
 	}
 	
 	private void addAdminFeatures() {
-		south.add(createCourseButton);
+		west.add(createCourseButton);
 		System.out.println("Adding create course button to frame");
 		north.add(new JLabel("Admin mode enabled!"));
 	}

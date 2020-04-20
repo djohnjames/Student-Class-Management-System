@@ -75,7 +75,7 @@ public class GUIController {
 			
 			//If not null search for course and display result
 			if(!out.contentEquals("")) {
-				System.out.println("You have the string: "+ "1" + out + " ready to send");
+				//System.out.println("You have the string: "+ "1" + out + " ready to send");
 				client.sendCommand("1" + out);
 				mainView.searchOutputDisplay(client.receiveCommand());
 			}

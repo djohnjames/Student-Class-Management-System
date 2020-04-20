@@ -22,7 +22,6 @@ public class RegistrationApp implements Runnable{
 	
 	
 	public RegistrationApp(Socket s, DBManager db) {
-		//studentList = db.readStFromDataBase();
 		aSocket = s;
 		this.db = db;
 		cat = new CourseCatalogue(db.getCourseList());
@@ -33,7 +32,6 @@ public class RegistrationApp implements Runnable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//System.out.println("Connected!");
 		sendString("Connected to a Student Record App!");
 	}
 	
@@ -70,9 +68,9 @@ public class RegistrationApp implements Runnable{
 			
 			case 1: //Course catalogue search
 				cName = read.substring(1,5);
-				 cNum = read.substring(5,8);
+				cNum = read.substring(5,8);
 				//System.out.println("The courseNum is: " + courseNum + "and the course name is: " + courseName);
-				System.out.println(cat.searchCat(cName, Integer.parseInt(cNum)).toString());
+				//System.out.println(cat.searchCat(cName, Integer.parseInt(cNum)).toString());
 				sendString(cat.searchCat(cName, Integer.parseInt(cNum)).toString());
 				break;
 				
@@ -108,8 +106,6 @@ public class RegistrationApp implements Runnable{
 				String out = studentSearch(studentList, Integer.parseInt(id)).printRegs();
 				sendString(out);
 				break;
-				
-			
 				
 			case 9: //Check student login
 				String [] userPass = read.substring(1).split(";");
