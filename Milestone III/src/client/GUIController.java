@@ -15,7 +15,7 @@ import javax.swing.UIManager;
 /**
  * The GUIController for the clients Registration App.
  * Dictates functionality of model and GUI depending on user inputs.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 19, 2020
  */

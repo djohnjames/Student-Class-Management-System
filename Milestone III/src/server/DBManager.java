@@ -6,7 +6,7 @@ import java.sql.*;
 /**
  * Reads from the SQL database and maintains the lists of students and courses
  * 
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 19, 2020
  *
@@ -85,7 +85,7 @@ public class DBManager implements IDBCredentials {
 	}
 
 	/**
-	 * Loads courses and course offerings from SQL database to member ArrayList <Course> courseList
+	 * Loads courses and course offerings from SQL database to member courseList
 	 */
 	public void readFromDataBase() {
 		initializeConnection();
@@ -108,7 +108,7 @@ public class DBManager implements IDBCredentials {
 	}
 	
 	/**
-	 * Loads students from SQL database to member ArrayList <Student> studentList
+	 * Loads students from SQL database to member studentList
 	 */
 	public void readStFromDataBase() {
 		initializeConnection();

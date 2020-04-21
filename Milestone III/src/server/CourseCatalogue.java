@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * A class for managing the course catalogue.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20th, 2020
  */

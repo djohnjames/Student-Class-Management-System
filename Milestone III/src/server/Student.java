@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * A class used for managing and storing a students info.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20, 2020
  */
@@ -111,8 +111,8 @@ public class Student {
 	 */
 	public void removeRegistration(String name, int courseID, int secID) {
 		for(Registration reg : this.studentRegList) {
-			System.out.println("here");
-			System.out.println("Course name: " + name + "courseID: " + courseID +  "Section number: " + secID);
+			//System.out.println("here");
+			//System.out.println("Course name: " + name + "courseID: " + courseID +  "Section number: " + secID);
 			if(secID ==  reg.getTheOffering().getSecNum() && courseID == reg.getTheOffering().getTheCourse().getCourseNum()
 					&& reg.getTheOffering().getTheCourse().getCourseName().equals(name)) {
 				studentRegList.remove(reg);

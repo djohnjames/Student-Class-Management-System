@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * A server-side application for a student registration app.
  * Based on client request, sends back required info for GUI.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20, 2020
  */
@@ -90,7 +90,6 @@ public class RegistrationApp implements Runnable{
 		while(true) {
 			try {
 				read = socketIn.readLine();
-				System.out.println("Read is: " + read);
 				//System.out.println("Received: " + read + " from client");
 				try {
 				selection = Character.getNumericValue((read.charAt(0)));
@@ -124,7 +123,7 @@ public class RegistrationApp implements Runnable{
 				Registration reg = new Registration ();
 				reg.completeRegistration(studentSearch(studentList, Integer.parseInt(id)), cat.searchCat(cName, Integer.parseInt(cNum)).getCourseOfferingAt(Integer.parseInt(cSec)-1));
 				
-				System.out.println("The registration: " + reg + "has been successfuly created for the student.");
+				//System.out.println("The registration: " + reg + "has been successfuly created for the student.");
 				sendString("The registration: " + reg + "has been successfuly created for the student.");
 				break;
 				

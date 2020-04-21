@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * A class to hold and manage details about a course offering.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20, 2020
  */
