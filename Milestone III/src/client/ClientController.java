@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
  * The client controller for the registration app on port 9090. Creates the views 
  * for the GUIController then creates a GUIController. Can send and recieve strings
  * 
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 19, 2020
  */
@@ -34,6 +34,13 @@ public class ClientController {
 	 * A bufferedreader to act as the socketIn for the client.
 	 */
 	private BufferedReader socketIn;
+	
+	/**
+	 * The host for the client to connect to. Change to IP 
+	 * address server is hosted on for testing the deployment 
+	 * functionality.
+	 */
+	private static final String host = "localhost";
 	
 
 	/**
@@ -104,8 +111,11 @@ public class ClientController {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		ClientController client = new ClientController(host, 9090);
+		
 		//ClientController client = new ClientController("127.0.0.1", 9090);
-		ClientController client = new ClientController("96.51.158.129", 9090);
+		//ClientController client = new ClientController("96.51.158.129", 9090);
 	}
 	
 }

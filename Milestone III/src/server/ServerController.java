@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 /**
  * A server-side controller for a student registration application.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20th, 2020
  */
@@ -52,8 +52,6 @@ public class ServerController {
 
 	/**
 	* Connects and communicates with a client. 
-	* 
-	* @throws IOException
 	*/
 	public void communicate() {
 		try {

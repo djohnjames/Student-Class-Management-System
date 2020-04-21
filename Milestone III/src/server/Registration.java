@@ -2,7 +2,7 @@ package server;
 
 /**
  * A class for storing and managing registration data.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20, 2020
  */

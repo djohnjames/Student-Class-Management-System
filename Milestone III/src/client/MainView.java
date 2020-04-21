@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  * The main view for the reg app.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20th, 2020
  */

@@ -8,7 +8,7 @@ import javax.swing.*;
 
 /**
  * A Log in View JFrame
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 19th, 2020
  */
@@ -147,7 +147,4 @@ public class LogInView extends JFrame{
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
-
-	
-	
 }

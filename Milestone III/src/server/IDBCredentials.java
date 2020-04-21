@@ -2,7 +2,7 @@ package server;
 
 /**
  * An interface used to store information required to access the SQL server.
- * @author Dylan Rae & Tyler Sawatzky
+ * @author Dylan Rae and Tyler Sawatzky
  * @version 1.0
  * @since April 20th, 2020
  *
@@ -28,5 +28,5 @@ public interface IDBCredentials {
    /**
     * The password to access the server.
     */
-   static final String PASSWORD = "Moshirpour";
+   static final String PASSWORD = "NaLyDnAlYd1@";
 }
