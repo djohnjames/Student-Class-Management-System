@@ -90,6 +90,7 @@ public class RegistrationApp implements Runnable{
 		while(true) {
 			try {
 				read = socketIn.readLine();
+				System.out.println("Read is: " + read);
 				//System.out.println("Received: " + read + " from client");
 				try {
 				selection = Character.getNumericValue((read.charAt(0)));
@@ -132,7 +133,9 @@ public class RegistrationApp implements Runnable{
 				cName = read.substring(2,6);
 				cNum = read.substring(6,9);
 				cSec = read.substring(9,10);
+				//System.out.println("cSec is: " + cSec);
 				studentSearch(studentList, Integer.parseInt(id)).removeRegistration(cName, Integer.parseInt(cNum), Integer.parseInt(cSec));
+				
 				sendString("The registration for student ID: " + id + " has been successfully removed!");
 				break;
 				

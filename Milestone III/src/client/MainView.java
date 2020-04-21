@@ -197,7 +197,7 @@ public class MainView extends JFrame {
 			String id = studentId.getText().toString();
 			String cName = courseName.getText().toString();
 			String cNum = courseNum.getText().toString();
-			String cSec = courseNum.getText().toString();
+			String cSec = courseSection.getText().toString();
 			String stringOut = id + cName + cNum + cSec;
 			System.out.println("You have the string: "+ stringOut + " ready to send");
 			return stringOut;
